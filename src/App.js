@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles.css";
+import UserProvider from "./context/UserContext";
+import React, { useEffect,useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
-function App() {
+import Home from "./views/Home";
+import Favoritos from "./views/Favoritos";
+import NotFound from "./views/NotFound";
+
+export default function App() {
+
+  const endpoint = '/fotos.json';
+
+  const [fotos, setFotos] = useState([]);
+
+  const getPhotos = async () => {
+    const response = await fetch(endpoint);
+    const json = await response.json();
+    console.log(json.photos);
+    setFotos(json.photos);
+  };
+
+  useEffect(() => {
+    getPhotos();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserProvider value={{fotos, setFotos}}>
+        <BrowserRouter>
+            <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/favoritos" element={<Favoritos />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </UserProvider>
     </div>
   );
 }
-
-export default App;

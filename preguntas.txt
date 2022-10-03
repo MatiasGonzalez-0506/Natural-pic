@@ -1,0 +1,52 @@
+¿En qué consiste el problema de prop drilling?
+
+en que parte integral del funcionamiento de React puede volverse bastante engorroso, molesto, 
+difícil de seguir, de pensar en forma lógica y de mantener. Dependiendo de que tan alejados estén 
+dichos componentes en la estructura de nuestra app, es probable que tengamos que pasar esos estados 
+por un montón de componentes intermedios para llegar al que necesitamos.
+
+Otro problema que tiene el prop drilling es que genera componentes muy "acoplados" o dependientes entre sí.
+
+https://frontend.adaitw.org/docs/react/react23
+
+
+¿Para qué sirve Context?
+
+En React podemos ocupar Context para crear un estado global o un estado de mayor
+alcance que un estado local para compartir estados entre múltiples o incluso todas las
+componentes.
+
+
+¿Cuál es el rol del componente Provider?
+
+Un Provider no es otra que el componente que proporciona el valor. Provider permite que los componentes 
+hijos tengan acceso a los datos globales que se pasan al provider.
+
+¿Para qué sirve useContext?
+Al useContext lo podemos definir como un Hook que permite comunicar componentes funcionales a través del contexto en React.
+
+const context = useContext(Context);
+
+flujo
+
+1.-crear carpeta context
+2.-crea context.js  ej:(SaludoProvider.js)
+3.-crear context y exportarlo ej:(export const ThemeContext = React.createContext();)
+4.-crear el provider en el template pasar el props a la funcion y al interior del template llamar a los props.children ej
+
+        const ThemeProvider = (props) => {
+          return (
+                  <ThemeContext.Provider value={{ theme, setTheme }}>
+                    {props.children}
+                  </ThemeContext.Provider>
+                );
+        }
+-esto va a hacer que los componentes que se encuentren al interior hereden los estados declarados
+5.- en app js importar provider
+6.- envolver en el provider los componentes que van a heredar los estados
+7.- en el componente importar el context con destructuring segun corresponda
+8.- usar el contexto
+      ej;(const { theme, setTheme } = React.useContext(ThemeContext))
+
+una vez realizado se puede manipular el estado global desde el componente
+
