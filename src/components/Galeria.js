@@ -1,10 +1,10 @@
 import "../assets/css/galeria.css";
 import React, { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { ContextApi } from "../context/ApiContext";
 import Heart from "./Heart";
 
 export default function Home() {
-  const { fotos, setFotos } = useContext(UserContext);
+  const { fotos, setFotos } = useContext(ContextApi);
 
   function changeHeart(i) {
     const newPic = [...fotos];

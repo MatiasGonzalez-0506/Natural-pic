@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import { UserContext } from '../context/UserContext';
+import { ContextApi } from '../context/ApiContext';
 import Heart from '../components/Heart';
 
 export default function Favoritos() {
 
-  const { fotos } = useContext(UserContext);
+  const { fotos } = useContext(ContextApi);
 
   return (
     <div>

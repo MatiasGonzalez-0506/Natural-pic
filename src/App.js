@@ -1,5 +1,5 @@
 import "./styles.css";
-import UserProvider from "./context/UserContext";
+import ApiContext from "./context/ApiContext";
 import React, { useEffect,useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <UserProvider value={{fotos, setFotos}}>
+      <ApiContext value={{fotos, setFotos}}>
         <BrowserRouter>
             <Navbar />
           <Routes>
@@ -36,7 +36,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-      </UserProvider>
+      </ApiContext>
     </div>
   );
 }
